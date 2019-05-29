@@ -7,5 +7,5 @@ class Player():
 		self.name = name
 		self.current_loc = current_loc
 	
-	def move(new_room):
+	def move(self, new_room):
 		self.current_loc = new_room

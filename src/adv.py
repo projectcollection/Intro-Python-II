@@ -59,6 +59,14 @@ def get_rooms_around(room):
             f'S: {room.s_to}\n'
             f'W: {room.w_to}')
 
+def change_room(player, direction):
+    newRoom = getattr(player.current_loc, f'{direction.lower()}_to')
+    if(newRoom is not None):
+        player.move(newRoom)
+    else:
+        print(f'There\'s no room at {direction}')
+    print('\n\n')
+
 while True:
     print(f'Current Location: {player1.current_loc.name}')
     print(textwrap.fill(player1.current_loc.desc, 25))
@@ -69,4 +77,6 @@ while True:
     
     if user_cmd == 'q':
         break
-    
+    elif(user_cmd in ('N', 'E', 'S', 'W')):
+        change_room(player1, user_cmd)
+

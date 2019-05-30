@@ -61,26 +61,28 @@ def tut():
     return (
             'm(move) direction(N,E,S,W)\n'
             'i(item) command(inv->"inventory", ir->"in room", get, drop)\n'
-            'i get(or)drop item_name\n'
+            'i get(or)drop item_name all(optional)\n'
             )	
 
 def item_action(player, action, item = '', get_all = False):
+    if(get_all == 'all'):
+        get_all = True
     if(action == 'inv'):
         print([i.name for i in player.items])
     elif(action == 'ir'):
         print([i.name for i in player.current_loc.items])
     elif(action == 'drop'):
-        print('ITEM DROPPED IN ROOM')
         items = player.get_item(item, get_all)
         if(len(items) > 0):
             player.current_loc.add_item(items)
+            print('ITEM DROPPED IN ROOM')
         else:
             print('Item not in inventory')
     elif(action == 'get'):
-        print('ITEM ADDED TO INVENTORY')
         items = player.current_loc.get_item(item, get_all)
         if(len(items) > 0):
             player.add_item(items)
+            print('ITEM ADDED TO INVENTORY')
         else:
             print('Item not found in room')
 
@@ -92,7 +94,7 @@ while True:
             f'{textwrap.dedent(player1.current_loc.rooms_around())}\n'
             '-----\n'))
     print('\n')
-    user_cmd = input('what\'s the move? write "tut" for tutorial\n>>>').split()
+    user_cmd = input('what\'s the move? write "tut" for tutorial\n>>> ').split()
     
     if user_cmd[0] == 'q':
         break
@@ -101,10 +103,11 @@ while True:
     elif(user_cmd[0] == 'i'):
         if len(user_cmd) == 2:
             item_action(player1, user_cmd[1])
+        elif len(user_cmd) > 3:
+            item_action(player1, user_cmd[1], user_cmd[2], user_cmd[3])
         else:
             item_action(player1, user_cmd[1], user_cmd[2])
     elif(user_cmd[0] == 'tut'):
         print(tut())
     else:
         print('Unknown Command')
-

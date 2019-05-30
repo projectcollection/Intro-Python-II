@@ -64,14 +64,6 @@ def tut():
             'i get(or)drop item_name\n'
             )	
 
-
-def change_room(player, direction):
-    newRoom = getattr(player.current_loc, f'{direction.lower()}_to')
-    if(newRoom is not None):
-        player.move(newRoom)
-    else:
-        print(f'There\'s no room at {direction}')
-
 def item_action(player, action, item = '', get_all = False):
     if(action == 'inv'):
         print([i.name for i in player.items])
@@ -104,8 +96,8 @@ while True:
     
     if user_cmd[0] == 'q':
         break
-    elif(user_cmd[0] == 'm' and len(user_cmd) >= 2 and user_cmd[1] in ('N', 'E', 'S', 'W')):
-        change_room(player1, user_cmd[1])
+    elif(user_cmd[0] == 'm' and len(user_cmd) >= 2 and user_cmd[1].upper() in ('N', 'E', 'S', 'W')):
+        player1.move(user_cmd[1])
     elif(user_cmd[0] == 'i'):
         if len(user_cmd) == 2:
             item_action(player1, user_cmd[1])

@@ -63,11 +63,7 @@ def tut():
             'i(item) command(inv->"inventory", ir->"in room", get, drop)\n'
             'i get(or)drop item_name\n'
             )	
-def get_rooms_around(room):
-    return (f'N: {room.n_to}\n'
-            f'E: {room.e_to}\n'
-            f'S: {room.s_to}\n'
-            f'W: {room.w_to}')
+
 
 def change_room(player, direction):
     newRoom = getattr(player.current_loc, f'{direction.lower()}_to')
@@ -101,7 +97,7 @@ while True:
     print(f'Current Location: {player1.current_loc.name}')
     print(textwrap.fill(player1.current_loc.desc, 25))
     print(('-----\n'
-            f'{textwrap.dedent(get_rooms_around(player1.current_loc))}\n'
+            f'{textwrap.dedent(player1.current_loc.rooms_around())}\n'
             '-----\n'))
     print('\n')
     user_cmd = input('what\'s the move? write "tut" for tutorial\n>>>').split()

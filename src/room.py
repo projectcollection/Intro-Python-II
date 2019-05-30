@@ -14,3 +14,9 @@ class Room(Item_Carrier):
 
 	def __str__(self):
 		return f"{self.name} \n {self.desc}"
+
+	def rooms_around(self):
+		return (f'N: {self.n_to}\n'
+				f'E: {self.e_to}\n'
+				f'S: {self.s_to}\n'
+				f'W: {self.w_to}')

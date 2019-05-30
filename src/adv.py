@@ -80,16 +80,16 @@ def item_action(player, action, item = '', get_all = False):
     if(action == 'inv'):
         print([i.name for i in player.items])
     elif(action == 'ir'):
-        print([i.name for i in player.current_loc.get_items()])
+        print([i.name for i in player.current_loc.items])
     elif(action == 'drop'):
-        print('DROP')
+        print('ITEM DROPPED IN ROOM')
         items = player.get_item(item, get_all)
         if(len(items) > 0):
             player.current_loc.add_item(items)
         else:
             print('Item not in inventory')
     elif(action == 'get'):
-        print('GET')
+        print('ITEM ADDED TO INVENTORY')
         items = player.current_loc.get_item(item, get_all)
         if(len(items) > 0):
             player.add_item(items)

@@ -8,8 +8,8 @@ class Player(Item_Carrier):
 		return super().__init__(name, items)
 
 	def move(self, direction):
-		newRoom = getattr(self.current_loc, f'{direction.lower()}_to')
-		if(newRoom is not None):
+		new_room = getattr(self.current_loc, f'{direction.lower()}_to')
+		if(new_room is not None):
 			self.current_loc = new_room
 		else:
 			print(f'There\'s no room at {direction.upper()}')
